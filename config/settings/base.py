@@ -11,6 +11,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+PROJECT_APPS = ['apps.account', 'apps.core', 'apps.commons']
+
+THIRD_PARTY_APPS = []
+
+INSTALLED_APPS += PROJECT_APPS + THIRD_PARTY_APPS
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
