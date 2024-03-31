@@ -1,0 +1,8 @@
+{% extends 'layouts/base.html' %}
+{% block content %}
+    {% include 'layouts/nav.html' %}
+    <div class="container" style="margin-top: 20px">
+        {% block sub_block %}
+        {% endblock %}
+    </div>
+{% endblock %}
