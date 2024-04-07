@@ -13,7 +13,7 @@ INSTALLED_APPS = [
 
 PROJECT_APPS = ['apps.account', 'apps.core', 'apps.commons']
 
-THIRD_PARTY_APPS = []
+THIRD_PARTY_APPS = ['crispy_forms', 'crispy_bootstrap4']
 
 INSTALLED_APPS += PROJECT_APPS + THIRD_PARTY_APPS
 
@@ -73,3 +73,4 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'account.User'  # app_name.model_name
+CRISPY_TEMPLATE_PACK = "bootstrap4"
