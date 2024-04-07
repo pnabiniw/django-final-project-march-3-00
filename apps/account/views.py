@@ -2,7 +2,7 @@ from django.shortcuts import redirect
 from apps.account.models import UserProfile
 from .forms import LoginForm, RegisterForm
 from django.views.generic import FormView
-from django.contrib.auth import get_user_model
+from django.contrib.auth import get_user_model, authenticate, login, logout
 
 User = get_user_model()
 
@@ -10,6 +10,20 @@ User = get_user_model()
 class LoginView(FormView):
     form_class = LoginForm
     template_name = "account/login.html"
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            email = form.cleaned_data.get("email")
+            password = form.cleaned_data.get("password")
+            user = authenticate(email=email, password=password)
+            if user:
+                login(request, user)
+                return redirect("home")
+            else:
+                return redirect("login_user")
+        else:
+            return redirect("login_user")
 
 
 class RegisterView(FormView):
@@ -35,3 +49,8 @@ class RegisterView(FormView):
             return redirect("home")
         else:
             return self.form_invalid(form)
+
+
+def user_logout(request):
+    logout(request)
+    return redirect("home")

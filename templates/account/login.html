@@ -17,11 +17,11 @@
                 </a>
                 <div style="margin-top: 100px">
                     <h2>User Login</h2>
-                    <form>
+                    <form method="post">
                         {% csrf_token %}
                         {{ form|crispy }}
                         <br>
-                        <a href="#" class="btn btn-success">Login</a>
+                        <button type="submit" class="btn btn-success">Login</button>
                         <a href="{% url 'user_register' %}" class="btn btn-outline-success">Register a new account ?</a>
                     </form>
                 </div>
