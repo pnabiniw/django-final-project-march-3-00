@@ -1,0 +1,56 @@
+{% extends 'layouts/base_with_nav.html' %}
+{% load static %}
+
+{% block sub_block %}
+    <div class="row">
+        <div class="col-md-4">
+            <br><br>
+            {% if user.userprofile.profile_picture %}
+                <img alt="pp" src="{{ user.userprofile.profile_picture.url }}" style="height: 300px;width: 300px">
+            {% else %}
+                <img alt="pp" src="{% static 'account/dummy.png' %}" style="height: 300px; width: 300px">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+        <h2>User Info</h2><br>
+            <table class="table table-striped">
+                <tbody>
+                <tr>
+                    <td><b>Full Name</b></td>
+                    <td>{{ user.get_full_name }}</td>
+                </tr>
+                <tr>
+                    <td><b>Email</b></td>
+                    <td>{{ user.email }}</td>
+                </tr>
+                <tr>
+                    <td><b>Phone Number</b></td>
+                    <td>{{ user.userprofile.phone }}</td>
+                </tr>
+                <tr>
+                    <td><b>Address</b></td>
+                    <td>{{ user.userprofile.address }}</td>
+                </tr>
+                <tr>
+                    <td><b>Bio</b></td>
+                    <td>{{ user.userprofile.bio }}</td>
+                </tr>
+                <tr>
+                    <td><b>Resume</b></td>
+                    <td>
+                        {% if user.userprofile.resume %}
+                            <a href="{{ user.userprofile.resume.url }}">Click to view</a>
+                        {% else %}
+                            N/A
+                        {% endif %}
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        <a href="{% url 'update_profile' user.id %}" class="btn btn-success">Update Profile</a>
+        <a href="{% url 'home' %}" class="btn btn-outline-success">Cancel</a>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,26 @@
+{% extends 'layouts/base_with_nav.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block sub_block %}
+    <div class="row">
+        <div class="col-md-4">
+            <br><br>
+            {% if user.userprofile.profile_picture %}
+                <img alt="pp" src="{{ user.userprofile.profile_picture.url }}" style="height: 300px;width: 300px">
+            {% else %}
+                <img alt="pp" src="{% static 'account/dummy.png' %}" style="height: 300px; width: 300px">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <h2>Update Profile</h2>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form|crispy }}<br>
+                <button type="submit" class="btn btn-success">Update</button>
+                <a href="{% url 'user_profile' user.id %}" class="btn btn-outline-success">Cancel</a>
+                <br><br><br><br><br><br>
+            </form>
+        </div>
+    </div>
+{% endblock %}
