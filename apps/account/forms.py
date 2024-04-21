@@ -27,6 +27,16 @@ class UserProfileForm(forms.Form):
     bio = forms.CharField(widget=forms.Textarea())
     resume = forms.FileField(required=False)
 
+    def validate(self):
+        print("In resume")
+        cleaned_data = self.cleaned_data
+        resume = self.cleaned_data.get("resume")
+        if resume:
+            extension = resume.name.split(".")[-1]  # resume.pdf  ["resume", "pdf"]
+            if extension not in ["pdf", "PDF"]:
+                raise forms.ValidationError("Please upload resume in pdf !")
+        return cleaned_data
+
     def __init__(self, *args, **kwargs):
         user = kwargs.pop("user", None)
         super().__init__(*args, **kwargs)

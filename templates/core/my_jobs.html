@@ -1,0 +1,23 @@
+{% extends 'layouts/base_with_nav.html' %}
+
+{% block sub_block %}
+    <h2>Job Applications</h2>
+    {% for my_job in my_jobs %}
+        <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ my_job.job.title }}</h5>
+                    <p class="card-text">{{ my_job.job.description }}
+                        <span style="color: white; background-color: darkgreen;
+                        padding: 3px; border-radius: 5px; font-size: 11px">{{ my_job.job.category.title }}</span>
+                    </p>
+                    <span style="color:white; background-color: #6f94c6; padding: 5px; border-radius: 5px">{{ my_job.status }}</span>
+                    <span style="color:white; background-color: orange; padding: 5px; border-radius: 5px">
+                        Applied on {{ my_job.created_at | date }}
+                    </span>&nbsp;
+                    {% if my_job.interview_date %}
+                        <span style="color:white; background-color: #6f94c6; padding: 5px; border-radius: 5px">Interview on {{ my_job.interview_date }}</span>
+                    {% endif %}
+                </div>
+            </div><br>
+    {% endfor %}
+{% endblock %}

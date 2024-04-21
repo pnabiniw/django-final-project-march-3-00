@@ -1,0 +1,6 @@
+{% extends 'layouts/base_with_nav.html' %}
+{% block sub_block %}
+    <h2>You are applying for a role of {{ job.title }}</h2>
+    <a href="{% url 'job_apply' job.id %}" class="btn btn-success">Apply</a>
+    <a href="{% url 'home' %}" class="btn btn-outline-success">Cancel</a>
+{% endblock %}
