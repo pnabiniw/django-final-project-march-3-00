@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from django.contrib import messages
+from apps.account.forms import ContactForm
 from .models import Job, JobApplication
 
 
@@ -56,3 +58,19 @@ class MyJobView(ListView):
 
     def get_queryset(self):
         return JobApplication.objects.filter(user=self.request.user)
+
+
+class ContactView(CreateView):
+    form_class = ContactForm
+    template_name = "core/contact.html"
+    success_url = reverse_lazy("home")
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+        form = self.get_form()
+        if form.is_valid():
+            messages.success(request, "Your response has been recorded. We will get back to you soon !")
+            return self.form_valid(form)
+        else:
+            messages.error(request, "Could not record your response !")
+            return self.form_invalid(form)

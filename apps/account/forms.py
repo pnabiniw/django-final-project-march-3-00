@@ -1,4 +1,5 @@
 from django import forms
+from apps.core.models import Contact
 
 
 class LoginForm(forms.Form):
@@ -53,3 +54,9 @@ class UserProfileForm(forms.Form):
                 self.fields["address"].initial = profile.address
                 self.fields["bio"].initial = profile.bio
                 self.fields["resume"].initial = profile.resume
+
+
+class ContactForm(forms.ModelForm):
+    class Meta:
+        model = Contact
+        fields = ["name", "email", "phone_number", "message"]
